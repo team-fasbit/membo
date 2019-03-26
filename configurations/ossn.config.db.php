@@ -16,11 +16,11 @@ $Ossn->host = 'localhost';
 // replace 3306 with your database host name;
 $Ossn->port = '3306';
 
-// replace root with your database username;
-$Ossn->user = 'root';
+// replace ossnuser with your database username;
+$Ossn->user = 'ossnuser';
 
-// replace  with your database password;
-$Ossn->password = '';
+// replace root with your database password;
+$Ossn->password = 'root';
 
 // replace ossn with your database name;
 $Ossn->database = 'ossn';
