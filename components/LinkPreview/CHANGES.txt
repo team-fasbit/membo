@@ -1,0 +1,10 @@
+LINK PREVIEW 4.1-4.3
+* Refactoring
+
+LINK PREVIEW 4.0-4.1
+* Fixed issue with the GeneralParser (a 3rd party library)
+* The description if not encoded cause the issue.
+
+LINK PREVIEW 3.0
+================
+* Fixed issues with media websites (youtube, vemo..etc).
