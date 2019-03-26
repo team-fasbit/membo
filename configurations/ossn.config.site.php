@@ -9,6 +9,6 @@
  * @link      https://www.opensource-socialnetwork.org/
  */
 
-$Ossn->url = 'http://test.membo.org';
+$Ossn->url = 'http://test.membo.org/';
 $Ossn->userdata = '/var/www/html/ossn_data/';
 
