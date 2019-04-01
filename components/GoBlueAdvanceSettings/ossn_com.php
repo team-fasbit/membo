@@ -126,5 +126,8 @@ function gbas_com_init()
     if (ossn_isAdminLoggedin()) {
         ossn_register_action('goblueadvancesettings/settings', __gbas__ . 'actions/settings.php');
     }
+    
+    // solution of video issues
+    ossn_extend_view('css/ossn.default', 'videos/css/videos');
 }
 ossn_register_callback('ossn', 'init', 'gbas_com_init');
