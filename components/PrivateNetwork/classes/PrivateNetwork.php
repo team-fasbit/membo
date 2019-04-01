@@ -28,6 +28,7 @@ class PrivateNetwork {
 						'login',
 						'site',
 						'avatar',
+						'userverified',
 				);
 		}
 		/**
