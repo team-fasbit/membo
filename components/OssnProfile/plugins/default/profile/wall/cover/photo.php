@@ -48,7 +48,7 @@ $image = ossn_profile_coverphoto_wall_url($image);
 		</div>
 
        <div class="post-contents">
-                <img src="<?php echo $image; ?>"/>
+			<a target="_blank" href="<?php echo ossn_site_url('post/view/' . $params['post']->guid); ?>"><img src="<?php echo $image; ?>"/></a>
     	</div>
 	<?php
 		$vars['entity'] = ossn_get_entity($params['post']->item_guid);
