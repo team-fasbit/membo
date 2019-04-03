@@ -8,7 +8,6 @@
  * @license   Open Source Social Network License (OSSN LICENSE)  http://www.opensource-socialnetwork.org/licence
  * @link      https://www.opensource-socialnetwork.org/
  */
-
 $image = ossn_get_entity($params['post']->item_guid);
 $image = ossn_profile_photo_wall_url($image);
 ?>
@@ -32,7 +31,6 @@ $image = ossn_profile_photo_wall_url($image);
                 <div class="ossn-wall-item-type"><?php echo ossn_print('ossn:profile:picture:updated');?></div>
             <?Php
             } else {
-
                 $owner = ossn_user_by_guid($params['post']->owner_guid);
                 ?>
                 <a href="<?php echo $params['user']->profileURL(); ?>">
@@ -47,8 +45,8 @@ $image = ossn_profile_photo_wall_url($image);
 			</div>
 		</div>
 
-		<div class="post-contents">
-                <img src="<?php echo $image; ?>"/>
+       <div class="post-contents">
+	   		<a target="_blank" href="<?php echo ossn_site_url('post/view/' . $params['post']->guid); ?>"><img src="<?php echo $image; ?>"/></a>
     	</div>
 	<?php
 		$vars['entity'] = ossn_get_entity($params['post']->item_guid);

@@ -82,7 +82,7 @@ $image = $params['image'];
             <p> <?php
             if (!empty($image)) {
                 ?>
-                <img src="<?php echo ossn_site_url("post/photo/{$params['post']->guid}/{$image}"); ?>"/>
+                <a target="_blank" href="<?php echo ossn_site_url('post/view/' . $params['post']->guid); ?>"><img src="<?php echo ossn_site_url("post/photo/{$params['post']->guid}/{$image}"); ?>"/></a>
 
             <?php } ?>
 			</p>            

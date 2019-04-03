@@ -10,6 +10,12 @@
  */
 
 $image = $params['image'];
+if(!isset($params['ismember'])){
+    $group = ossn_get_group_by_guid($params['post']->owner_guid);
+    if ($group->isMember(NULL, ossn_loggedin_user()->guid)) {
+      	$params['ismember'] = 1;
+    }
+}
 ?>
 <!-- wall item -->
 <div class="ossn-wall-item" id="activity-item-<?php echo $params['post']->guid; ?>">
@@ -27,19 +33,13 @@ $image = $params['image'];
 				</div>
 			</div>
 			<div class="user">
-           <?php if ($params['user']->guid == $params['post']->owner_guid) { ?>
-                <a class="owner-link"
-                   href="<?php echo $params['user']->profileURL(); ?>"> <?php echo $params['user']->fullname; ?> </a>
-            <?Php
-            } else {
-                $owner = ossn_user_by_guid($params['post']->owner_guid);
+            <a class="owner-link" href="<?php echo $params['user']->profileURL(); ?>"> <?php echo $params['user']->fullname; ?> </a>
+            <?php if ($params['show_group'] == true) {
+                $group = ossn_get_group_by_guid($params['post']->owner_guid);
                 ?>
-                <a href="<?php echo $params['user']->profileURL(); ?>">
-                    <?php echo $params['user']->fullname; ?>
-                </a>
-                <i class="fa fa-angle-right fa-lg"></i>
-                <a href="<?php echo $owner->profileURL(); ?>"> <?php echo $owner->fullname; ?></a>
-            <?php } ?>
+               <i class="fa fa-angle-right fa-lg"></i>
+                <a class="owner-link"  href="<?php echo ossn_site_url("group/{$group->guid}"); ?>"> <?php echo $group->title; ?></a>
+            <?php } ?>        
 			</div>
 			<div class="post-meta">
 				<span class="time-created"><?php echo ossn_user_friendly_time($params['post']->time_created); ?></span>
@@ -50,43 +50,20 @@ $image = $params['image'];
 							'text' => '-',
 							'class' => 'time-created',
 					));
-					if(isset($params['post']->sentiment) && !empty($params['post']->sentiment)){
-						echo ossn_plugin_view('sentiment/icon', array(
-								'sentiment' => $params['post']->sentiment,
-								'text' => '-',
-								'class' => 'time-created',
-						));
-					}
-				?>
-                
+				?>                
 			</div>
 		</div>
 		<div class="post-contents">
 			<p><?php echo stripslashes($params['text']); ?></p>
-			 <?php
-						if(!empty($params['friends'])){
-							echo '<div class="friends">';
-	                        foreach ($params['friends'] as $friend) {
-								if(!empty($friend)){
-	    	                        $user = ossn_user_by_guid($friend);
-    	    	                    $url = $user->profileURL();
-        	    	                $friends[] = "<a href='{$url}'>{$user->fullname}</a>";
-								}
-                	        }
-							if(!empty($friends)){
-								echo implode(', ', $friends);
-							}
-							echo '</div>';
-						}
-              ?>
             <p> <?php
             if (!empty($image)) {
                 ?>
-                <img src="<?php echo ossn_site_url("post/photo/{$params['post']->guid}/{$image}"); ?>"/>
+                <a target="_blank" href="<?php echo ossn_site_url('post/view/' . $params['post']->guid); ?>"><img src="<?php echo ossn_site_url("post/photo/{$params['post']->guid}/{$image}"); ?>"/></a>
 
             <?php } ?>
 			</p>            
 		</div>
+        <?php if($params['ismember'] === 1){  ?>
 		<div class="comments-likes">
 			<div class="menu-likes-comments-share">
 				<?php echo ossn_view_menu('postextra', 'wall/menus/postextra');?>
@@ -104,6 +81,7 @@ $image = $params['image'];
             		?>            				
 			</div>
 		</div>
+        <?php } ?>
 	</div>
 </div>
 <!-- ./ wall item -->
