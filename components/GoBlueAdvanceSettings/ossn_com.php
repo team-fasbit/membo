@@ -126,8 +126,46 @@ function gbas_com_init()
     if (ossn_isAdminLoggedin()) {
         ossn_register_action('goblueadvancesettings/settings', __gbas__ . 'actions/settings.php');
     }
-    
+
     // solution of video issues
     ossn_extend_view('css/ossn.default', 'videos/css/videos');
+
+    // solution of click on image post
+    //templates
+    ossn_add_hook('single:template', 'user', 'ossn_single_templates');
+    ossn_add_hook('single:template', 'group', 'ossn_single_templates');
+    ossn_add_hook('single:template', 'cover:photo', 'ossn_single_profile_cover_photo');
+    ossn_add_hook('single:template', 'profile:photo', 'ossn_single_profile_photo');
 }
 ossn_register_callback('ossn', 'init', 'gbas_com_init');
+
+// solution of click on image post
+function ossn_single_view_template(array $params = array())
+{
+    if (!is_array($params)) {
+        return false;
+    }
+    $type = $params['post']->type;
+    if (isset($params['post']->item_type)) {
+        $type = $params['post']->item_type;
+    }
+    if (ossn_is_hook('single:template', $type)) {
+        return ossn_call_hook('single:template', $type, $params);
+    }
+    return false;
+}
+
+function ossn_single_templates($hook, $type, $return, $params)
+{
+    ossn_trigger_callback('wall', 'load:item', $params);
+    $params = ossn_call_hook('wall', 'templates:item', $params, $params);
+    return ossn_plugin_view("wall/templates/single/{$type}/item", $params);
+}
+
+function ossn_single_profile_photo($hook, $type, $return, $params) {
+    return ossn_plugin_view("profile/single/profile/photo", $params);
+}
+
+function ossn_single_profile_cover_photo($hook, $type, $return, $params) {
+    return ossn_plugin_view("profile/single/cover/photo", $params);
+}
