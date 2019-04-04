@@ -32,17 +32,17 @@ class Verification extends OssnObject {
         }
     }
     
-    public function setPhotoProof($value, $guid) {
-        if (isset($value) && !empty($value) && isset($guid) && !empty($guid)) {
-            $this->type = 'verification';
-            $this->subtype = 'Photo Proof';
-            $this->owner_guid = $guid;
-            $this->description = $value;
-            return $this->addObject();
-        } else {
-            return false;
-        }
-    }
+    // public function setPhotoProof($value, $guid) {
+    //     if (isset($value) && !empty($value) && isset($guid) && !empty($guid)) {
+    //         $this->type = 'verification';
+    //         $this->subtype = 'Photo Proof';
+    //         $this->owner_guid = $guid;
+    //         $this->description = $value;
+    //         return $this->addObject();
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     public function isVerified($guid) {
         $verified = $this->searchObject([
@@ -59,7 +59,8 @@ class Verification extends OssnObject {
 
     public function allProofUploaded($guid) {
         $uploaded_proof = 0;
-        $proofs = [ 'Address Proof', 'ID Proof', 'Photo Proof' ];
+        // $proofs = [ 'Address Proof', 'ID Proof', 'Photo Proof' ];
+        $proofs = [ 'Address Proof', 'ID Proof' ];
 
         foreach ($proofs as $proof) {
             $records = $this->searchObject([
@@ -72,6 +73,6 @@ class Verification extends OssnObject {
             }
         }
 
-        return (count($proofs) === $uploaded_proof);
+        return (count($proofs) === $uploaded_proof) ? true : false;
     }
 }

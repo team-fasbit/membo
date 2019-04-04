@@ -25,9 +25,9 @@ if (isset($_FILES)) {
     if ($id_proof = gbas_process_upload('gbas_id_proof', ossn_get_userdata() . 'verification/' . $user->guid . '/', 'ID Proof File')) {
         $verify->setIDProof($id_proof, $user->guid);
     }
-    if ($photo_proof = gbas_process_upload('gbas_photo_proof', ossn_get_userdata() . 'verification/' . $user->guid . '/', 'Photo Proof File')) {
-        $verify->setPhotoProof($photo_proof, $user->guid);
-    }
+    // if ($photo_proof = gbas_process_upload('gbas_photo_proof', ossn_get_userdata() . 'verification/' . $user->guid . '/', 'Photo Proof File')) {
+    //     $verify->setPhotoProof($photo_proof, $user->guid);
+    // }
 }
 
 redirect(REF);

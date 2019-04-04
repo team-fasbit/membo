@@ -18,10 +18,10 @@
     <input type="file" name="gbas_id_proof" id="gbas_id_proof" accept=".png, .bmp, .jpg, .jpeg, .pdf" />
 </div>
 <br />
-<div>
+<!-- <div>
     <label>Photo Proof:</label>
     <input type="file" name="gbas_photo_proof" id="gbas_photo_proof" accept=".png, .bmp, .jpg, .jpeg, .pdf" />
-</div>
+</div> -->
 <br />
 <p>supported files: .png / .bmp / .jpg / .jpeg / .pdf</p>
 <div>
