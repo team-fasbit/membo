@@ -50,11 +50,10 @@ function gbas_com_init()
                     $user = ossn_loggedin_user();
                     $verify = new Verification;
                     $verify_status = $verify->isVerified($user->guid);
-                    $all_proof_uploaded = $verify->allProofUploaded($user->guid);
 
-                    if ($verify_status === false && $action[0] !== '' && !$all_proof_uploaded) {
+                    if ($verify_status === false && $action[0] !== '') {
                         redirect('verification');
-                    } else if ($verify_status === false && $action[0] !== 'waiting' && $all_proof_uploaded) {
+                    } else if ($verify_status === 'WAITING' && $action[0] !== 'waiting') {
                         redirect('verification/waiting');
                     } else if ($verify_status === 'DENIED' && $action[0] !== 'deny') {
                         redirect('verification/deny');
@@ -116,15 +115,17 @@ function gbas_com_init()
                 ossn_register_action('goblueadvancesettings/verification', __gbas__ . 'actions/user/verification.php');
             }
         }
-
-        // user details
-        // $user = ossn_loggedin_user();
     }
 
     // admin side setting page
     ossn_register_com_panel('GoBlueAdvanceSettings', 'settings');
+    ossn_register_admin_sidemenu('userverification', 'userverification', ossn_site_url('administrator/settings/userverification'), ossn_print('admin:sidemenu:usermanager'));
+    ossn_register_site_settings_page('userverification', 'settings/administrator/GoBlueAdvanceSettings/verification');
     if (ossn_isAdminLoggedin()) {
         ossn_register_action('goblueadvancesettings/settings', __gbas__ . 'actions/settings.php');
+        ossn_register_action('verification/approve', __gbas__ . 'actions/verification/approve.php');
+        ossn_register_action('verification/deny', __gbas__ . 'actions/verification/deny.php');
+        ossn_register_action('verification/download', __gbas__ . 'actions/verification/download.php');
     }
 
     // solution of video issues

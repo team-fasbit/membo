@@ -9,5 +9,7 @@
 
 $en = array(
 		'goblueadvancesettings' => 'GoBlue Advance Settings',
+		'userverification' => 'User Verification',
+		'userverification:settings'=> 'User Verification',
 );
 ossn_register_languages('en', $en); 
