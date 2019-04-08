@@ -49,4 +49,9 @@ class Verification extends OssnObject
             ]
         ], $params));
     }
+
+    public function deleteProof($guid)
+    {
+        return $this->deleteObject($guid);
+    }
 }

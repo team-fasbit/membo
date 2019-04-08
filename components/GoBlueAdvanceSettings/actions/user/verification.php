@@ -26,7 +26,7 @@ if (isset($_FILES)) {
 
     if($address_proof && $id_proof) {
         if ($verify->saveProofs($user->guid, $address_proof, $id_proof)) {
-            ossn_trigger_message('Proofs saved Successfully.', 'error');
+            ossn_trigger_message('Proofs saved Successfully.');
         } else {
             ossn_trigger_message('Unable to save Proofs.', 'error');
         }

@@ -24,6 +24,10 @@ $count = $verify->getProofs([
     if ($list) {
         foreach ($list as $item) {
             $user = ossn_user_by_guid($item->owner_guid);
+            if (!$user) {
+                $verify->deleteProof($item->guid);
+                continue;
+            }
     ?>
     <tr>
         <td><a target="_blank" href="<?php echo $user->profileURL(); ?>"><?php echo $user->fullname; ?></a></td>
