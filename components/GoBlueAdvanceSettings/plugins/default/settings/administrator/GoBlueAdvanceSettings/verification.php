@@ -33,7 +33,7 @@ $count = $verify->getProofs([
         <td><a target="_blank" href="<?php echo $user->profileURL(); ?>"><?php echo $user->fullname; ?></a></td>
         <td><a class="label label-default" href="<?php echo ossn_site_url("action/verification/download?guid={$item->guid}&type=address_proof", true); ?>">Download Address Proof</a></td>
         <td><a class="label label-default" href="<?php echo ossn_site_url("action/verification/download?guid={$item->guid}&type=id_proof", true); ?>">Download ID Proof</a></td>
-        <td><a class="label label-success" href="<?php echo ossn_site_url("action/verification/approve?guid={$item->guid}", true); ?>">Approve</a> &nbsp; <a class="label label-danger" href="<?php echo ossn_site_url("action/verification/deny?guid={$item->guid}", true); ?>">Dey</a></td>
+        <td><a class="label label-success" href="<?php echo ossn_site_url("action/verification/approve?guid={$item->guid}", true); ?>">Approve</a> &nbsp; <a class="label label-danger" href="<?php echo ossn_site_url("action/verification/deny?guid={$item->guid}", true); ?>">Deny</a></td>
     </tr>
     <?php
         }
