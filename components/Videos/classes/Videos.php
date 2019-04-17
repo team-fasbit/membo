@@ -26,7 +26,7 @@ class Videos extends OssnObject {
 		 *
 		 * @return boolean
 		 */
-		public function addVideo($title = '', $description = '') {
+		public function addVideo($title = '', $description = '', $friends = '', $location = '', $access = '') {
 				self::initAttributes();
 				$user = ossn_loggedin_user();
 				
@@ -91,7 +91,7 @@ class Videos extends OssnObject {
 														));
 														//save video cover
 														if($this->file->addFile()) {
-																$this->addWall($guid);
+																$this->addWall($guid, $friends, $location, $access);
 																return true;
 														} else {
 																$object = ossn_get_object($guid);
@@ -150,7 +150,7 @@ class Videos extends OssnObject {
 		 *
 		 * @return boolean
 		 */
-		public function addWall($itemguid = '') {
+		public function addWall($itemguid = '', $friends = '', $location = '', $access = '') {
 				self::initAttributes();
 				if(empty($itemguid) || !class_exists("OssnWall")) {
 						return false;
@@ -159,7 +159,7 @@ class Videos extends OssnObject {
 				$this->wall->owner_guid  = ossn_loggedin_user()->guid;
 				$this->wall->poster_guid = ossn_loggedin_user()->guid;
 				$this->wall->item_guid   = $itemguid;
-				if($this->wall->Post('null:data')) {
+				if($this->wall->Post('null:data', $friends, $location, $access)) {
 						return true;
 				}
 				return false;

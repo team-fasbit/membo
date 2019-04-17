@@ -115,6 +115,10 @@ function gbas_com_init()
                 ossn_register_action('goblueadvancesettings/verification', __gbas__ . 'actions/user/verification.php');
             }
         }
+
+        // recreate post actions
+        ossn_unregister_action('wall/post/a');
+        ossn_register_action('wall/post/a', __gbas__ . 'actions/wall/post/home.php');
     }
 
     // admin side setting page
@@ -137,6 +141,20 @@ function gbas_com_init()
     ossn_add_hook('single:template', 'group', 'ossn_single_templates');
     ossn_add_hook('single:template', 'cover:photo', 'ossn_single_profile_cover_photo');
     ossn_add_hook('single:template', 'profile:photo', 'ossn_single_profile_photo');
+
+    // video option on post box
+    $container_control = [
+        'name' => 'video',
+        'class' => 'ossn-wall-video',
+        'text' => '<i class="fa fa-video-camera"></i>',
+    ];
+    ossn_register_menu_item('wall/container/controls/home', $container_control);
+    ossn_register_menu_item('wall/container/controls/user', $container_control);
+    // ossn_register_menu_item('wall/container/controls/group', $container_control);
+
+    // solution of invisible notification
+    ossn_add_hook('notification:view', 'like:entity:file:video', 'ossn_notification_like_video');
+    ossn_add_hook('notification:view', 'comments:entity:file:video', 'ossn_notification_like_video');
 }
 ossn_register_callback('ossn', 'init', 'gbas_com_init');
 
@@ -163,10 +181,45 @@ function ossn_single_templates($hook, $type, $return, $params)
     return ossn_plugin_view("wall/templates/single/{$type}/item", $params);
 }
 
-function ossn_single_profile_photo($hook, $type, $return, $params) {
+function ossn_single_profile_photo($hook, $type, $return, $params)
+{
     return ossn_plugin_view("profile/single/profile/photo", $params);
 }
 
-function ossn_single_profile_cover_photo($hook, $type, $return, $params) {
+function ossn_single_profile_cover_photo($hook, $type, $return, $params)
+{
     return ossn_plugin_view("profile/single/cover/photo", $params);
+}
+
+function ossn_notification_like_video($hook, $type, $return, $params)
+{
+    $notif          = $params;
+    $baseurl        = ossn_site_url();
+    $user           = ossn_user_by_guid($notif->poster_guid);
+    $user->fullname = "<strong>{$user->fullname}</strong>";
+    $iconURL        = $user->iconURL()->small;
+
+    $img = "<div class='notification-image'><img src='{$iconURL}' /></div>";
+    if (preg_match('/like/i', $notif->type)) {
+        $type = 'like';
+    }
+    if (preg_match('/comments/i', $notif->type)) {
+        $type = 'comment';
+    }
+    $type = "<div class='ossn-notification-icon-{$type}'></div>";
+    if ($notif->viewed !== NULL) {
+        $viewed = '';
+    } elseif ($notif->viewed == NULL) {
+        $viewed = 'class="ossn-notification-unviewed"';
+    }
+    $video_guid = ossn_get_entity($notif->subject_guid)->owner_guid;
+    $url               = ossn_site_url("video/view/{$video_guid}");
+    $notification_read = "{$baseurl}notification/read/{$notif->guid}?notification=" . urlencode($url);
+    return "<a href='{$notification_read}'>
+       <li {$viewed}> {$img} 
+       <div class='notfi-meta'> {$type}
+       <div class='data'>" . ossn_print("ossn:notifications:{$notif->type}", array(
+        $user->fullname
+    )) . '</div>
+       </div></li></a>';
 }
