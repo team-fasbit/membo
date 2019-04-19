@@ -157,6 +157,15 @@ class Videos extends OssnObject {
 				}
 				$this->wall->item_type   = 'video';
 				$this->wall->owner_guid  = ossn_loggedin_user()->guid;
+				$owner = input('wallowner');
+				if (isset($owner) && !empty($owner)) {
+					$this->wall->owner_guid = $owner;
+					if ($access == OSSN_PRIVATE) {
+						$this->wall->type = 'group';
+					} else {
+						$this->wall->name = 'user';
+					}
+				}
 				$this->wall->poster_guid = ossn_loggedin_user()->guid;
 				$this->wall->item_guid   = $itemguid;
 				if($this->wall->Post('null:data', $friends, $location, $access)) {

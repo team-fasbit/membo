@@ -119,6 +119,10 @@ function gbas_com_init()
         // recreate post actions
         ossn_unregister_action('wall/post/a');
         ossn_register_action('wall/post/a', __gbas__ . 'actions/wall/post/home.php');
+        ossn_unregister_action('wall/post/u');
+        ossn_register_action('wall/post/u', __gbas__ . 'actions/wall/post/user.php');
+        ossn_unregister_action('wall/post/g');
+        ossn_register_action('wall/post/g', __gbas__ . 'actions/wall/post/group.php');
     }
 
     // admin side setting page
@@ -150,7 +154,7 @@ function gbas_com_init()
     ];
     ossn_register_menu_item('wall/container/controls/home', $container_control);
     ossn_register_menu_item('wall/container/controls/user', $container_control);
-    // ossn_register_menu_item('wall/container/controls/group', $container_control);
+    ossn_register_menu_item('wall/container/controls/group', $container_control);
 
     // solution of invisible notification
     ossn_add_hook('notification:view', 'like:entity:file:video', 'ossn_notification_like_video');

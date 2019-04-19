@@ -12,27 +12,32 @@
 //init ossnwall
 $OssnWall = new OssnWall;
 
-//poster guid and owner guid is same as user is posting on home page on its own wall
-$OssnWall->owner_guid  = ossn_loggedin_user()->guid;
+//poster guid and owner guid is same as user is posting on its own wall
+$OssnWall->owner_guid = ossn_loggedin_user()->guid;
 $OssnWall->poster_guid = ossn_loggedin_user()->guid;
 
-//check if owner guid is zero then exit
-if ($OssnWall->owner_guid == 0 || $OssnWall->poster_guid == 0) {
-    ossn_trigger_message(ossn_print('post:create:error'), 'error');
-    redirect(REF);
+//check if users is not posting on its own wall then change wallowner
+$owner = input('wallowner');
+if (isset($owner) && !empty($owner)) {
+    $OssnWall->owner_guid = $owner;
 }
 
+//walltype is user
+$OssnWall->name = 'user';
+
+
 //getting some inputs that are required for wall post
-$post     = input('post');
-$friends  = input('friends');
+$post = input('post');
+$friends = input('friends');
 $location = input('location');
-$privacy  = input('privacy');
+$privacy = input('privacy');
 
 //validate wall privacy 
 $privacy = ossn_access_id_str($privacy);
-$access  = '';
 if (!empty($privacy)) {
     $access = input('privacy');
+} else {
+    $access = OSSN_FRIENDS;
 }
 
 if (isset($_FILES['ossn_video'])) {
