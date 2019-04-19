@@ -162,7 +162,8 @@ function gbas_com_init()
 }
 ossn_register_callback('ossn', 'init', 'gbas_com_init');
 
-// solution of click on image post
+// ==============================================================================================================================================================================================================================
+
 function ossn_single_view_template(array $params = array())
 {
     if (!is_array($params)) {

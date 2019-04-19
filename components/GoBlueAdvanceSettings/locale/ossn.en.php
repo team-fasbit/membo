@@ -13,5 +13,6 @@ $en = array(
 		'userverification:settings'=> 'User Verification',
 		'ossn:notifications:comments:entity:file:video' => '%s commented your video.',
 		'ossn:notifications:like:entity:file:video' => '%s liked your video.',
+		'username:error' => 'Username should be minimum 5 character long and only contains a to z and A to Z and 0 to 9.',
 );
 ossn_register_languages('en', $en); 
