@@ -143,6 +143,9 @@ function gbas_com_init()
     // solution of video issues
     ossn_extend_view('css/ossn.default', 'videos/css/videos');
 
+    // Exntend CSS Style Sheet
+    ossn_extend_view('css/ossn.default', 'GoBlueAdvanceSettings/css/style');
+
     // solution of click on image post
     //templates
     ossn_add_hook('single:template', 'user', 'ossn_single_templates');
