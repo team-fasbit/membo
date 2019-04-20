@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Open Source Social Network
- *
- * @packageOpen Source Social Network
- * @author    Open Social Website Core Team <info@informatikon.com>
- * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
- * @link      http://www.opensource-socialnetwork.org/licence
+ * @package GoBlue Advance Settings
+ * @author Ankur Patel <ankur2194@gmail.com>
+ * @license Commercial
+ * @link https://www.softlab24.com/license/commercial
  */
+
  $video = $params['video'];
  $entity = ossn_get_entities(array(
 		'type' => 'object',

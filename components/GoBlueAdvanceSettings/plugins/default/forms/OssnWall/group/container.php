@@ -1,13 +1,12 @@
 <?php
+
 /**
- *    OpenSource-SocialNetwork
- *
- * @package   (softlab24.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
- * @copyright (C) SOFTLAB24 LIMITED
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @package GoBlue Advance Settings
+ * @author Ankur Patel <ankur2194@gmail.com>
+ * @license Commercial
+ * @link https://www.softlab24.com/license/commercial
  */
+
   ossn_load_external_js('places.min');
   ossn_load_external_js('jquery.tokeninput'); 
 ?>

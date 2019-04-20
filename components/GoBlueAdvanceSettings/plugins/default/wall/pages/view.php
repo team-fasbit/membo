@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Open Source Social Network
- *
- * @package   (softlab24.com).ossn
- * @author    OSSN Core Team <info@softlab24.com>
- * @copyright (C) SOFTLAB24 LIMITED
- * @license   Open Source Social Network License (OSSN LICENSE)  http://www.opensource-socialnetwork.org/licence
- * @link      https://www.opensource-socialnetwork.org/
+ * @package GoBlue Advance Settings
+ * @author Ankur Patel <ankur2194@gmail.com>
+ * @license Commercial
+ * @link https://www.softlab24.com/license/commercial
  */
+
 echo '<div class="user-activity">';
 $params['post']->full_view = true;
 $user = ossn_user_by_guid($params['post']->poster_guid);

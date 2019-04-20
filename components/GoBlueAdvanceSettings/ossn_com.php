@@ -123,6 +123,10 @@ function gbas_com_init()
         ossn_register_action('wall/post/u', __gbas__ . 'actions/wall/post/user.php');
         ossn_unregister_action('wall/post/g');
         ossn_register_action('wall/post/g', __gbas__ . 'actions/wall/post/group.php');
+
+        // group invite error message bug fix
+        ossn_unregister_action('groupinvite/send');
+        ossn_register_action('groupinvite/send', __gbas__ . 'actions/groupinvite/send.php');
     }
 
     // admin side setting page

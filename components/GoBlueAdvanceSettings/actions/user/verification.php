@@ -31,7 +31,7 @@ if (isset($_FILES)) {
             ossn_trigger_message('Unable to save Proofs.', 'error');
         }
     } else {
-        ossn_trigger_message('Unable to save Files & Proofs.', 'error');
+        ossn_trigger_message('Please select Address Proof and ID Proof both files.', 'error');
     }
 }
 
