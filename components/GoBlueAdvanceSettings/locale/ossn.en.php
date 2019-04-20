@@ -17,5 +17,6 @@ $en = array(
 		'groupinvite:widget:desc' => 'Tag your friends and click Invite.',
 		'groupinvite:sent' => 'Invitation has been sent, your friend will receive a notification about your invitation',
 		'account:settings' => 'Edit Profile',
+		'birthdays:upcoming' => 'Upcoming Birthdays',
 );
 ossn_register_languages('en', $en); 
