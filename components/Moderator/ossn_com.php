@@ -255,7 +255,7 @@ function mod_group_edit_page($hook, $type, $return, $params) {
 				);
 				$form   = ossn_view_form('edit', $params, false);
 				echo ossn_set_page_layout('module', array(
-						'title' => ossn_print('edit'),
+						'title' => ossn_print('edit') . ' Group',
 						'content' => $form
 				));
 		}

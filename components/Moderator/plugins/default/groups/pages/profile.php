@@ -105,7 +105,7 @@ $members = $params['group']->getMembers();
                     $ismember = 1;
                     ?>
                     <a href="<?php echo ossn_group_url($params['group']->guid); ?>edit"
-                       class='button-grey'><?php echo ossn_print('settings'); ?></a>
+                       class='button-grey'>Edit Group</a>
                     <a href="javascript:void(0);" onclick="Ossn.repositionGroupCOVER(<?php echo $params['group']->guid; ?>);"
                        class='button-grey group-c-position'><?php echo ossn_print('save:position'); ?></a>
                     <?php if (!$cover) { ?>
