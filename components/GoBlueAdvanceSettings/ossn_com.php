@@ -153,15 +153,66 @@ function gbas_com_init()
     ossn_add_hook('single:template', 'cover:photo', 'ossn_single_profile_cover_photo');
     ossn_add_hook('single:template', 'profile:photo', 'ossn_single_profile_photo');
 
+    // add tooltip to all postbox icons
+    ossn_unregister_menu('emojii_selector', 'wall/container/controls/home');
+    ossn_unregister_menu('emojii_selector', 'wall/container/controls/user');
+    ossn_unregister_menu('emojii_selector', 'wall/container/controls/group');
+    ossn_unregister_menu('location', 'wall/container/controls/home');
+    ossn_unregister_menu('location', 'wall/container/controls/user');
+    ossn_unregister_menu('location', 'wall/container/controls/group');
+    ossn_unregister_menu('photo', 'wall/container/controls/home');
+    ossn_unregister_menu('photo', 'wall/container/controls/user');
+    ossn_unregister_menu('photo', 'wall/container/controls/group');
+    ossn_unregister_menu('tag_friend', 'wall/container/controls/home');
+    ossn_unregister_menu('tag_friend', 'wall/container/controls/user');
+
+    $container_controls = [
+        [
+            'name' => 'tag_friend',
+            'class' => 'ossn-wall-friend',
+            'text' => '<i class="fa fa-users"></i>',
+            'title' => 'Tag Friends',
+        ],
+        [
+            'name' => 'location',
+            'class' => 'ossn-wall-location',
+            'text' => '<i class="fa fa-map-marker"></i>',
+            'title' => 'Location',
+        ],
+        [
+            'name' => 'photo',
+            'class' => 'ossn-wall-photo',
+            'text' => '<i class="fa fa-picture-o"></i>',
+            'title' => 'Photo',
+        ],
+        [
+            'name' => 'emojii_selector',
+            'text' => '<i class="fa fa-smile-o"></i>',
+            'href' => 'javascript:void(0);',
+            'title' => 'Emoji',
+        ]
+    ];
+
+    foreach ($container_controls as $key => $container_control) {
+        ossn_register_menu_item('wall/container/controls/home', $container_control);
+        ossn_register_menu_item('wall/container/controls/user', $container_control);
+        if ($container_control['name'] != 'tag_friend') {
+            ossn_register_menu_item('wall/container/controls/group', $container_control);
+        }
+    }
+
     // video option on post box
     $container_control = [
         'name' => 'video',
         'class' => 'ossn-wall-video',
         'text' => '<i class="fa fa-video-camera"></i>',
+        'title' => 'Video',
     ];
     ossn_register_menu_item('wall/container/controls/home', $container_control);
     ossn_register_menu_item('wall/container/controls/user', $container_control);
     ossn_register_menu_item('wall/container/controls/group', $container_control);
+
+    ossn_extend_view('js/opensource.socialnetwork', 'GoBlueAdvanceSettings/js/tooltip_register');
 
     // solution of invisible notification
     ossn_add_hook('notification:view', 'like:entity:file:video', 'ossn_notification_like_video');
