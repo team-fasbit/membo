@@ -94,7 +94,7 @@ if(isset($params['items'])) {
 								echo '<div class="row customfield-item" data-guid="'.$guid.'"><div class="col-md-12">';
 								echo "<div class='radio-block'>";
 								if($args['label'] === true){
-									echo "<label>".$args['placeholder']."</label>";
+									echo "<label>".ossn_print($args['name'])."</label>";
 								}								
 								echo ossn_plugin_view('input/radio', $args);
 								echo "</div></div></div>";
