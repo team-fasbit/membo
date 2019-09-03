@@ -97,8 +97,10 @@ $videolink = ossn_plugin_view('output/url', array(
 					foreach ($params['friends'] as $friend) {
 						if (!empty($friend)) {
 							$user = ossn_user_by_guid($friend);
-							$url = $user->profileURL();
-							$friends[] = "<a href='{$url}'>{$user->fullname}</a>";
+							if ($user) {
+								$url = $user->profileURL();
+								$friends[] = "<a href='{$url}'>{$user->fullname}</a>";
+							}
 						}
 					}
 					if (!empty($friends)) {
